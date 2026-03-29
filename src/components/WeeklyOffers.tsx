@@ -7,7 +7,7 @@ const catalogPages = [
   "katalogu-1.jpeg",
   "katalogu-2.jpeg",
   "katalogu-3.jpeg"
-];
+].map(img => `${import.meta.env.BASE_URL}${img}`.replace(/\/+/g, '/'));
 
 const Page = React.forwardRef((props: any, ref: any) => {
   return (
@@ -18,7 +18,8 @@ const Page = React.forwardRef((props: any, ref: any) => {
         <img 
           src={props.image} 
           alt={`Faqja`} 
-          className="w-full h-full object-fill" 
+          className="w-full h-full object-contain sm:object-fill" 
+          loading="eager"
           referrerPolicy="no-referrer"
         />
       </div>
@@ -51,16 +52,16 @@ export default function WeeklyOffers() {
         </div>
 
         {/* Catalog Viewer */}
-        <div className="relative max-w-[450px] mx-auto flex justify-center items-center px-4 sm:px-12">
+        <div className="relative max-w-[450px] mx-auto block px-2 sm:px-12">
           
-          <div className="shadow-2xl rounded-lg overflow-hidden border-4 border-white">
+          <div className="shadow-2xl rounded-lg overflow-hidden border-2 sm:border-4 border-white w-full aspect-[4/5.6] bg-white">
             <HTMLFlipBook
               width={400}
               height={560}
               size="stretch"
-              minWidth={280}
+              minWidth={250}
               maxWidth={450}
-              minHeight={400}
+              minHeight={350}
               maxHeight={650}
               maxShadowOpacity={0.6}
               showCover={false}
@@ -73,6 +74,7 @@ export default function WeeklyOffers() {
               onFlip={onPage}
               className="mx-auto"
               ref={bookRef}
+              style={{ display: 'block' }}
             >
               {catalogPages.map((img, index) => (
                 <Page key={index} image={img} />
@@ -83,14 +85,14 @@ export default function WeeklyOffers() {
           {/* Navigation Buttons */}
           <button 
             onClick={() => bookRef.current?.pageFlip()?.flipPrev()}
-            className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white shadow-lg rounded-full flex items-center justify-center text-gray-800 hover:text-[#e33226] transition-all z-10 border border-gray-100"
+            className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white/90 backdrop-blur-sm shadow-lg rounded-full flex items-center justify-center text-gray-800 hover:text-[#e33226] transition-all z-30 border border-gray-100"
             aria-label="Faqja e mëparshme"
           >
             <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8" />
           </button>
           <button 
             onClick={() => bookRef.current?.pageFlip()?.flipNext()}
-            className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white shadow-lg rounded-full flex items-center justify-center text-gray-800 hover:text-[#e33226] transition-all z-10 border border-gray-100"
+            className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white/90 backdrop-blur-sm shadow-lg rounded-full flex items-center justify-center text-gray-800 hover:text-[#e33226] transition-all z-30 border border-gray-100"
             aria-label="Faqja tjetër"
           >
             <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8" />

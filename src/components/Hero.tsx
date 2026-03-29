@@ -32,7 +32,7 @@ export default function Hero() {
             </h2>
             
             <p className="text-lg sm:text-xl text-gray-800 mb-8 leading-relaxed font-medium">
-              Zbuloni gamën tonë të gjerë të produkteve vendase dhe ndërkombëtare. Çmimet më të mira dhe shërbimi më cilësor në qytet.
+              Më shumë shije, më pak shpenzime në ExtraMarket. Shijoni cilësinë e produkteve lokale e të huaja përmes ofertave fantastike çdo ditë.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center w-full">
