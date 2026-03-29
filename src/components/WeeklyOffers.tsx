@@ -10,25 +10,29 @@ const catalogPages = [
 ];
 
 const Page = React.forwardRef((props: any, ref: any) => {
-  // Krijojmë rrugën e saktë duke u siguruar që nuk ka double slashes
-  const baseUrl = import.meta.env.BASE_URL || "/";
-  const imageSrc = `${baseUrl}/${props.image}`.replace(/\/+/g, '/');
+  // Kjo funksion gjen rrugën e saktë në çdo pajisje
+  const getFullUrl = (name: string) => {
+    // @ts-ignore
+    const baseUrl = import.meta.env.BASE_URL || "/";
+    // Sigurohemi që rruga fillon me base dhe nuk ka double slashes
+    return (baseUrl + name).replace(/\/+/g, '/');
+  };
 
   return (
     <div className="page bg-white shadow-inner" ref={ref} data-density="soft">
-      <div className="w-full h-full flex items-center justify-center bg-gray-50 relative">
-        {/* Magazine spine shadow effect */}
-        <div className="absolute inset-y-0 left-0 w-4 bg-gradient-to-r from-black/10 to-transparent z-10"></div>
+      <div className="w-full h-full flex items-center justify-center bg-gray-50 relative overflow-hidden">
+        {/* Hija e mesit për efekt magazine */}
+        <div className="absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-black/20 to-transparent z-10"></div>
         <img 
-          src={imageSrc} 
+          src={getFullUrl(props.image)} 
           alt="Faqja e katalogut" 
           className="w-full h-full object-contain" 
           loading="eager"
           referrerPolicy="no-referrer"
           onError={(e) => {
-            // Fallback nëse dështon rruga me BASE_URL
+            // Nëse dështon rruga e parë, provo rrugën direkte (relative)
             const target = e.target as HTMLImageElement;
-            if (target.src !== props.image) {
+            if (!target.src.endsWith(props.image)) {
               target.src = props.image;
             }
           }}
@@ -63,9 +67,9 @@ export default function WeeklyOffers() {
         </div>
 
         {/* Catalog Viewer */}
-        <div className="relative max-w-[450px] mx-auto block px-2 sm:px-12">
+        <div className="relative max-w-[450px] mx-auto block px-2 sm:px-12 min-h-[400px]">
           
-          <div className="shadow-2xl rounded-lg overflow-hidden border-2 sm:border-4 border-white w-full aspect-[4/5.6] bg-white">
+          <div className="shadow-2xl rounded-lg overflow-hidden border-2 sm:border-4 border-white w-full aspect-[4/5.6] bg-white relative">
             <HTMLFlipBook
               width={400}
               height={560}
