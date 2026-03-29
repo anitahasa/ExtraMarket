@@ -7,20 +7,31 @@ const catalogPages = [
   "katalogu-1.jpeg",
   "katalogu-2.jpeg",
   "katalogu-3.jpeg"
-].map(img => `${import.meta.env.BASE_URL}${img}`.replace(/\/+/g, '/'));
+];
 
 const Page = React.forwardRef((props: any, ref: any) => {
+  // Krijojmë rrugën e saktë duke u siguruar që nuk ka double slashes
+  const baseUrl = import.meta.env.BASE_URL || "/";
+  const imageSrc = `${baseUrl}/${props.image}`.replace(/\/+/g, '/');
+
   return (
     <div className="page bg-white shadow-inner" ref={ref} data-density="soft">
-      <div className="w-full h-full flex items-center justify-center bg-white relative">
+      <div className="w-full h-full flex items-center justify-center bg-gray-50 relative">
         {/* Magazine spine shadow effect */}
         <div className="absolute inset-y-0 left-0 w-4 bg-gradient-to-r from-black/10 to-transparent z-10"></div>
         <img 
-          src={props.image} 
-          alt={`Faqja`} 
-          className="w-full h-full object-contain sm:object-fill" 
+          src={imageSrc} 
+          alt="Faqja e katalogut" 
+          className="w-full h-full object-contain" 
           loading="eager"
           referrerPolicy="no-referrer"
+          onError={(e) => {
+            // Fallback nëse dështon rruga me BASE_URL
+            const target = e.target as HTMLImageElement;
+            if (target.src !== props.image) {
+              target.src = props.image;
+            }
+          }}
         />
       </div>
     </div>
@@ -59,9 +70,9 @@ export default function WeeklyOffers() {
               width={400}
               height={560}
               size="stretch"
-              minWidth={250}
+              minWidth={240}
               maxWidth={450}
-              minHeight={350}
+              minHeight={340}
               maxHeight={650}
               maxShadowOpacity={0.6}
               showCover={false}
