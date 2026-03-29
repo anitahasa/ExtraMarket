@@ -11,7 +11,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <a href="/" className="flex items-center">
+            <a href="#" className="flex items-center">
               <Logo />
             </a>
           </div>

@@ -4,14 +4,14 @@ import { ChevronLeft, ChevronRight, BookOpen } from "lucide-react";
 import HTMLFlipBook from "react-pageflip";
 
 const catalogPages = [
-  "/katalogu-1.jpeg",
-  "/katalogu-2.jpeg",
-  "/katalogu-3.jpeg"
+  `${import.meta.env.BASE_URL}katalogu-1.jpeg`,
+  `${import.meta.env.BASE_URL}katalogu-2.jpeg`,
+  `${import.meta.env.BASE_URL}katalogu-3.jpeg`
 ];
 
 const Page = React.forwardRef((props: any, ref: any) => {
   return (
-    <div className="page bg-white shadow-md border border-gray-200" ref={ref}>
+    <div className="page bg-white shadow-md border border-gray-200" ref={ref} data-density="hard">
       <div className="w-full h-full flex items-center justify-center bg-white overflow-hidden">
         <img src={props.image} alt={`Faqja`} className="w-full h-full object-contain" />
       </div>
@@ -55,9 +55,13 @@ export default function WeeklyOffers() {
             minHeight={360}
             maxHeight={600}
             maxShadowOpacity={0.5}
-            showCover={true}
+            showCover={false}
             mobileScrollSupport={true}
             usePortrait={true}
+            startPage={0}
+            drawShadow={true}
+            flippingTime={1000}
+            useMouseEvents={true}
             onFlip={onPage}
             className="mx-auto shadow-2xl"
             ref={bookRef}
