@@ -10,12 +10,33 @@ const catalogPages = [
 ];
 
 const Page = React.forwardRef((props: any, ref: any) => {
-  // Kjo funksion gjen rrugën e saktë në çdo pajisje
-  const getFullUrl = (name: string) => {
+  const [imgSrc, setImgSrc] = useState("");
+  
+  // Përcaktojmë rrugën fillestare
+  React.useEffect(() => {
     // @ts-ignore
     const baseUrl = import.meta.env.BASE_URL || "/";
-    // Sigurohemi që rruga fillon me base dhe nuk ka double slashes
-    return (baseUrl + name).replace(/\/+/g, '/');
+    const initialPath = (baseUrl + props.image).replace(/\/+/g, '/');
+    setImgSrc(initialPath);
+  }, [props.image]);
+
+  const handleError = () => {
+    const fallbacks = [
+      props.image, // relative: katalogu-1.jpeg
+      "/" + props.image, // absolute root: /katalogu-1.jpeg
+      "./" + props.image, // relative current: ./katalogu-1.jpeg
+      "/ExtraMarket/" + props.image // hardcoded fallback for GH Pages
+    ];
+
+    // Gjejmë rrugën tjetër që nuk është ajo që dështoi
+    const nextFallback = fallbacks.find(f => {
+      const fullFallbackUrl = new URL(f, window.location.origin).href;
+      return imgSrc !== fullFallbackUrl && imgSrc !== f;
+    });
+
+    if (nextFallback) {
+      setImgSrc(nextFallback);
+    }
   };
 
   return (
@@ -23,20 +44,16 @@ const Page = React.forwardRef((props: any, ref: any) => {
       <div className="w-full h-full flex items-center justify-center bg-gray-50 relative overflow-hidden">
         {/* Hija e mesit për efekt magazine */}
         <div className="absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-black/20 to-transparent z-10"></div>
-        <img 
-          src={getFullUrl(props.image)} 
-          alt="Faqja e katalogut" 
-          className="w-full h-full object-contain" 
-          loading="eager"
-          referrerPolicy="no-referrer"
-          onError={(e) => {
-            // Nëse dështon rruga e parë, provo rrugën direkte (relative)
-            const target = e.target as HTMLImageElement;
-            if (!target.src.endsWith(props.image)) {
-              target.src = props.image;
-            }
-          }}
-        />
+        {imgSrc && (
+          <img 
+            src={imgSrc} 
+            alt="Faqja e katalogut" 
+            className="w-full h-full object-contain" 
+            loading="eager"
+            referrerPolicy="no-referrer"
+            onError={handleError}
+          />
+        )}
       </div>
     </div>
   );
