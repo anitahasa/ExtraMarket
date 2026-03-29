@@ -4,16 +4,23 @@ import { ChevronLeft, ChevronRight, BookOpen } from "lucide-react";
 import HTMLFlipBook from "react-pageflip";
 
 const catalogPages = [
-  `${import.meta.env.BASE_URL}katalogu-1.jpeg`,
-  `${import.meta.env.BASE_URL}katalogu-2.jpeg`,
-  `${import.meta.env.BASE_URL}katalogu-3.jpeg`
+  "katalogu-1.jpeg",
+  "katalogu-2.jpeg",
+  "katalogu-3.jpeg"
 ];
 
 const Page = React.forwardRef((props: any, ref: any) => {
   return (
-    <div className="page bg-white shadow-md border border-gray-200" ref={ref} data-density="hard">
-      <div className="w-full h-full flex items-center justify-center bg-white overflow-hidden">
-        <img src={props.image} alt={`Faqja`} className="w-full h-full object-contain" />
+    <div className="page bg-white shadow-inner" ref={ref} data-density="soft">
+      <div className="w-full h-full flex items-center justify-center bg-white relative">
+        {/* Magazine spine shadow effect */}
+        <div className="absolute inset-y-0 left-0 w-4 bg-gradient-to-r from-black/10 to-transparent z-10"></div>
+        <img 
+          src={props.image} 
+          alt={`Faqja`} 
+          className="w-full h-full object-fill" 
+          referrerPolicy="no-referrer"
+        />
       </div>
     </div>
   );
@@ -28,7 +35,7 @@ export default function WeeklyOffers() {
   };
 
   return (
-    <div id="katalogu" className="py-16 bg-gray-50 border-y border-gray-100 overflow-hidden">
+    <div id="katalogu" className="py-16 bg-gray-100 border-y border-gray-200 overflow-hidden">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
           <div className="inline-flex items-center justify-center gap-2 text-[#e33226] font-semibold mb-3 bg-red-50 px-4 py-2 rounded-full">
@@ -44,32 +51,34 @@ export default function WeeklyOffers() {
         </div>
 
         {/* Catalog Viewer */}
-        <div className="relative max-w-[450px] mx-auto flex justify-center items-center px-10 sm:px-12">
+        <div className="relative max-w-[450px] mx-auto flex justify-center items-center px-4 sm:px-12">
           
-          <HTMLFlipBook
-            width={400}
-            height={520}
-            size="stretch"
-            minWidth={280}
-            maxWidth={450}
-            minHeight={360}
-            maxHeight={600}
-            maxShadowOpacity={0.5}
-            showCover={false}
-            mobileScrollSupport={true}
-            usePortrait={true}
-            startPage={0}
-            drawShadow={true}
-            flippingTime={1000}
-            useMouseEvents={true}
-            onFlip={onPage}
-            className="mx-auto shadow-2xl"
-            ref={bookRef}
-          >
-            {catalogPages.map((img, index) => (
-              <Page key={index} image={img} />
-            ))}
-          </HTMLFlipBook>
+          <div className="shadow-2xl rounded-lg overflow-hidden border-4 border-white">
+            <HTMLFlipBook
+              width={400}
+              height={560}
+              size="stretch"
+              minWidth={280}
+              maxWidth={450}
+              minHeight={400}
+              maxHeight={650}
+              maxShadowOpacity={0.6}
+              showCover={false}
+              mobileScrollSupport={true}
+              usePortrait={true}
+              startPage={0}
+              drawShadow={true}
+              flippingTime={800}
+              useMouseEvents={true}
+              onFlip={onPage}
+              className="mx-auto"
+              ref={bookRef}
+            >
+              {catalogPages.map((img, index) => (
+                <Page key={index} image={img} />
+              ))}
+            </HTMLFlipBook>
+          </div>
 
           {/* Navigation Buttons */}
           <button 
