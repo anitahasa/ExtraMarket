@@ -10,50 +10,46 @@ const catalogPages = [
 ];
 
 const Page = React.forwardRef((props: any, ref: any) => {
-  const [imgSrc, setImgSrc] = useState("");
-  
-  // Përcaktojmë rrugën fillestare
-  React.useEffect(() => {
-    // @ts-ignore
-    const baseUrl = import.meta.env.BASE_URL || "/";
-    const initialPath = (baseUrl + props.image).replace(/\/+/g, '/');
-    setImgSrc(initialPath);
-  }, [props.image]);
+  const [imgSrc, setImgSrc] = useState(() => {
+    try {
+      // Kjo metodë gjen rrugën e saktë pavarësisht pajisjes apo mjedisit
+      const url = new URL(props.image, window.location.href);
+      return url.href;
+    } catch (e) {
+      return props.image;
+    }
+  });
+  const [retry, setRetry] = useState(0);
 
   const handleError = () => {
-    const fallbacks = [
-      props.image, // relative: katalogu-1.jpeg
-      "/" + props.image, // absolute root: /katalogu-1.jpeg
-      "./" + props.image, // relative current: ./katalogu-1.jpeg
-      "/ExtraMarket/" + props.image // hardcoded fallback for GH Pages
-    ];
-
-    // Gjejmë rrugën tjetër që nuk është ajo që dështoi
-    const nextFallback = fallbacks.find(f => {
-      const fullFallbackUrl = new URL(f, window.location.origin).href;
-      return imgSrc !== fullFallbackUrl && imgSrc !== f;
-    });
-
-    if (nextFallback) {
-      setImgSrc(nextFallback);
+    console.error("Dështoi ngarkimi i fotos:", imgSrc);
+    if (retry === 0) {
+      // Provo rrugën absolute me emrin e repo-s
+      setImgSrc("/ExtraMarket/" + props.image);
+      setRetry(1);
+    } else if (retry === 1) {
+      // Provo rrugën absolute nga rrënja
+      setImgSrc("/" + props.image);
+      setRetry(2);
+    } else if (retry === 2) {
+      // Provo rrugën relative direkte
+      setImgSrc(props.image);
+      setRetry(3);
     }
   };
 
   return (
     <div className="page bg-white shadow-inner" ref={ref} data-density="soft">
       <div className="w-full h-full flex items-center justify-center bg-gray-50 relative overflow-hidden">
-        {/* Hija e mesit për efekt magazine */}
         <div className="absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-black/20 to-transparent z-10"></div>
-        {imgSrc && (
-          <img 
-            src={imgSrc} 
-            alt="Faqja e katalogut" 
-            className="w-full h-full object-contain" 
-            loading="eager"
-            referrerPolicy="no-referrer"
-            onError={handleError}
-          />
-        )}
+        <img 
+          src={imgSrc} 
+          alt="Faqja e katalogut" 
+          className="w-full h-full object-contain" 
+          loading="eager"
+          referrerPolicy="no-referrer"
+          onError={handleError}
+        />
       </div>
     </div>
   );
