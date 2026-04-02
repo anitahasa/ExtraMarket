@@ -5,13 +5,12 @@
 
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import TrustSignals from './components/TrustSignals';
+import Categories from './components/Categories';
 import WeeklyOffers from './components/WeeklyOffers';
+import OffersGrid from './components/OffersGrid';
 import Recipes from './components/Recipes';
-import Announcements from './components/Announcements';
-import About from './components/About';
+import TrustSignals from './components/TrustSignals';
 import Contact from './components/Contact';
-import LoyaltyBanner from './components/LoyaltyBanner';
 import Footer from './components/Footer';
 
 export default function App() {
@@ -20,15 +19,16 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
+        <Categories />
         <WeeklyOffers />
+        <OffersGrid />
         <Recipes />
         <TrustSignals />
-        <About />
-        <Announcements />
         <Contact />
-        <LoyaltyBanner />
       </main>
       <Footer />
     </div>
   );
 }
+
+

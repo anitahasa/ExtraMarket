@@ -1,7 +1,6 @@
-import React, { useState, useRef } from "react";
-import { ChevronLeft, ChevronRight, BookOpen } from "lucide-react";
-// @ts-ignore
-import HTMLFlipBook from "react-pageflip";
+import React, { useState } from "react";
+import { ChevronRight, BookOpen } from "lucide-react";
+import { motion } from 'motion/react';
 
 const catalogPages = [
   "images/catalog1.jpg",
@@ -52,85 +51,68 @@ const Page = React.forwardRef((props: any, ref: any) => {
 });
 
 export default function WeeklyOffers() {
-  const bookRef = useRef<any>(null);
-  const [page, setPage] = useState(0);
-
-  const onPage = (e: any) => {
-    setPage(e.data);
-  };
-
   return (
-    <div id="katalogu" className="py-16 bg-gray-100 border-y border-gray-200 overflow-hidden">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-10">
-          <div className="inline-flex items-center justify-center gap-2 text-[#e33226] font-semibold mb-3 bg-red-50 px-4 py-2 rounded-full">
+    <section id="katalogu" className="py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center justify-center gap-2 text-[#e33226] font-bold mb-4 bg-red-50 px-6 py-2 rounded-full uppercase tracking-widest text-sm">
             <BookOpen className="w-5 h-5" />
-            <span>Oferta e vlefshme 27 - 29 Mars</span>
+            <span>Katalogu i Javës</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">
-            Fundjava e Ofertave
+          <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tight mb-6">
+            Shfletoni <span className="text-[#e33226]">Produktet</span>
           </h2>
-          <p className="text-gray-500 mt-3 max-w-2xl mx-auto">
-            Shfletoni fletëpalosjen tonë për të zbuluar zbritjet dhe ofertat më të fundit në të gjitha pikat ExtraMarket.
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Zbuloni të gjitha ofertat tona fantastike në fletëpalosjen javore. 
+            Cilësi maksimale me çmimet më të ulëta në treg.
           </p>
         </div>
 
-        {/* Catalog Viewer */}
-        <div className="relative max-w-[450px] mx-auto block px-2 sm:px-12 min-h-[400px]">
-          
-          <div className="shadow-2xl rounded-lg overflow-hidden border-2 sm:border-4 border-white w-full aspect-[4/5.6] bg-white relative">
-            <HTMLFlipBook
-              width={400}
-              height={560}
-              size="stretch"
-              minWidth={240}
-              maxWidth={450}
-              minHeight={340}
-              maxHeight={650}
-              maxShadowOpacity={0.6}
-              showCover={false}
-              mobileScrollSupport={true}
-              usePortrait={true}
-              startPage={0}
-              drawShadow={true}
-              flippingTime={800}
-              useMouseEvents={true}
-              onFlip={onPage}
-              className="mx-auto"
-              ref={bookRef}
-              style={{ display: 'block' }}
+        {/* Catalog Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          {catalogPages.map((img, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="group relative"
             >
-              {catalogPages.map((img, index) => (
-                <Page key={index} image={img} />
-              ))}
-            </HTMLFlipBook>
-          </div>
-
-          {/* Navigation Buttons */}
-          <button 
-            onClick={() => bookRef.current?.pageFlip()?.flipPrev()}
-            className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white/90 backdrop-blur-sm shadow-lg rounded-full flex items-center justify-center text-gray-800 hover:text-[#e33226] transition-all z-30 border border-gray-100"
-            aria-label="Faqja e mëparshme"
-          >
-            <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8" />
-          </button>
-          <button 
-            onClick={() => bookRef.current?.pageFlip()?.flipNext()}
-            className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white/90 backdrop-blur-sm shadow-lg rounded-full flex items-center justify-center text-gray-800 hover:text-[#e33226] transition-all z-30 border border-gray-100"
-            aria-label="Faqja tjetër"
-          >
-            <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8" />
-          </button>
-
+              <div className="aspect-[1/1.414] rounded-[2rem] overflow-hidden bg-gray-100 shadow-lg group-hover:shadow-2xl transition-all duration-500 border-4 border-white">
+                <Page image={img} />
+                
+                {/* Hover Overlay */}
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
+                  <button className="bg-white text-gray-900 px-8 py-3 rounded-full font-bold shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-transform">
+                    Zmadho faqen
+                  </button>
+                </div>
+              </div>
+              
+              <div className="mt-6 text-center">
+                <span className="text-sm font-black text-gray-400 uppercase tracking-widest">Faqja {index + 1}</span>
+              </div>
+            </motion.div>
+          ))}
         </div>
-        
-        {/* Page Indicator */}
-        <div className="text-center mt-8">
-          <div className="inline-block bg-white shadow-sm border border-gray-200 text-gray-700 px-4 py-1.5 rounded-full text-sm font-medium">
-            Faqja {page + 1} nga {catalogPages.length}
+
+        {/* Call to Action */}
+        <div className="mt-20 bg-gray-900 rounded-[3rem] p-12 text-center relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#e33226] blur-[120px] opacity-20 -translate-y-1/2 translate-x-1/2"></div>
+          <div className="relative z-10">
+            <h3 className="text-3xl font-bold text-white mb-6">Dëshironi të shihni më shumë?</h3>
+            <p className="text-gray-400 mb-10 text-lg max-w-2xl mx-auto">
+              Vizitoni pikat tona ExtraMarket në Durrës, Tiranë dhe Manëz për të përfituar nga të gjitha ofertat.
+            </p>
+            <a href="#kontakti" className="inline-flex items-center gap-2 bg-[#e33226] text-white px-10 py-4 rounded-full font-black text-lg hover:bg-[#c42b20] transition-all shadow-xl">
+              Na vizitoni tani
+              <ChevronRight className="w-6 h-6" />
+            </a>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
+

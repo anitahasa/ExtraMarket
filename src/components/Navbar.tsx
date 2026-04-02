@@ -18,12 +18,13 @@ export default function Navbar() {
 
           {/* Desktop Links */}
           <div className="hidden lg:flex items-center gap-8">
-            <a href="#kreu" className="text-gray-700 hover:text-[#e33226] font-medium transition-colors">Kreu</a>
-            <a href="#katalogu" className="text-gray-700 hover:text-[#e33226] font-medium transition-colors">Katalogu</a>
-            <a href="#receta" className="text-gray-700 hover:text-[#e33226] font-medium transition-colors">Receta</a>
-            <a href="#njoftime" className="text-gray-700 hover:text-[#e33226] font-medium transition-colors">Njoftime</a>
-            <a href="#rreth-nesh" className="text-gray-700 hover:text-[#e33226] font-medium transition-colors">Rreth Nesh</a>
-            <a href="#kontakti" className="text-gray-700 hover:text-[#e33226] font-medium transition-colors">Kontakti</a>
+            <a href="#kreu" className="text-gray-700 hover:text-[#e33226] font-bold transition-colors">Kreu</a>
+            <a href="#categories" className="text-gray-700 hover:text-[#e33226] font-bold transition-colors">Kategoritë</a>
+            <a href="#katalogu" className="text-gray-700 hover:text-[#e33226] font-bold transition-colors">Katalogu</a>
+            <a href="#offers" className="text-gray-700 hover:text-[#e33226] font-bold transition-colors">Ofertat</a>
+            <a href="#recipes" className="text-gray-700 hover:text-[#e33226] font-bold transition-colors">Receta</a>
+            <a href="#pse-ne" className="text-gray-700 hover:text-[#e33226] font-bold transition-colors">Pse ne?</a>
+            <a href="#kontakti" className="text-gray-700 hover:text-[#e33226] font-bold transition-colors">Kontakti</a>
           </div>
 
           {/* Right Actions */}
@@ -47,12 +48,13 @@ export default function Navbar() {
       {/* Mobile Menu Dropdown */}
       {isOpen && (
         <div className="lg:hidden bg-white border-t border-gray-100 px-4 pt-2 pb-6 space-y-2 shadow-lg absolute w-full left-0">
-          <a href="#kreu" onClick={() => setIsOpen(false)} className="block px-4 py-3 text-gray-700 font-medium hover:bg-red-50 hover:text-[#e33226] rounded-lg transition-colors">Kreu</a>
-          <a href="#katalogu" onClick={() => setIsOpen(false)} className="block px-4 py-3 text-gray-700 font-medium hover:bg-red-50 hover:text-[#e33226] rounded-lg transition-colors">Katalogu</a>
-          <a href="#receta" onClick={() => setIsOpen(false)} className="block px-4 py-3 text-gray-700 font-medium hover:bg-red-50 hover:text-[#e33226] rounded-lg transition-colors">Receta</a>
-          <a href="#njoftime" onClick={() => setIsOpen(false)} className="block px-4 py-3 text-gray-700 font-medium hover:bg-red-50 hover:text-[#e33226] rounded-lg transition-colors">Njoftime</a>
-          <a href="#rreth-nesh" onClick={() => setIsOpen(false)} className="block px-4 py-3 text-gray-700 font-medium hover:bg-red-50 hover:text-[#e33226] rounded-lg transition-colors">Rreth Nesh</a>
-          <a href="#kontakti" onClick={() => setIsOpen(false)} className="block px-4 py-3 text-gray-700 font-medium hover:bg-red-50 hover:text-[#e33226] rounded-lg transition-colors">Kontakti</a>
+          <a href="#kreu" onClick={() => setIsOpen(false)} className="block px-4 py-3 text-gray-700 font-bold hover:bg-red-50 hover:text-[#e33226] rounded-lg transition-colors">Kreu</a>
+          <a href="#categories" onClick={() => setIsOpen(false)} className="block px-4 py-3 text-gray-700 font-bold hover:bg-red-50 hover:text-[#e33226] rounded-lg transition-colors">Kategoritë</a>
+          <a href="#katalogu" onClick={() => setIsOpen(false)} className="block px-4 py-3 text-gray-700 font-bold hover:bg-red-50 hover:text-[#e33226] rounded-lg transition-colors">Katalogu</a>
+          <a href="#offers" onClick={() => setIsOpen(false)} className="block px-4 py-3 text-gray-700 font-bold hover:bg-red-50 hover:text-[#e33226] rounded-lg transition-colors">Ofertat</a>
+          <a href="#recipes" onClick={() => setIsOpen(false)} className="block px-4 py-3 text-gray-700 font-bold hover:bg-red-50 hover:text-[#e33226] rounded-lg transition-colors">Receta</a>
+          <a href="#pse-ne" onClick={() => setIsOpen(false)} className="block px-4 py-3 text-gray-700 font-bold hover:bg-red-50 hover:text-[#e33226] rounded-lg transition-colors">Pse ne?</a>
+          <a href="#kontakti" onClick={() => setIsOpen(false)} className="block px-4 py-3 text-gray-700 font-bold hover:bg-red-50 hover:text-[#e33226] rounded-lg transition-colors">Kontakti</a>
         </div>
       )}
     </nav>
