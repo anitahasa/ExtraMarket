@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ShoppingCart, Tag } from 'lucide-react';
+import { Tag } from 'lucide-react';
 
 const offers = [
   {
@@ -84,14 +84,12 @@ export default function OffersGrid() {
                 <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#e33226] transition-colors">
                   {offer.name}
                 </h3>
-                <div className="flex items-end gap-3 mb-6">
-                  <span className="text-3xl font-black text-[#e33226]">€{offer.price}</span>
-                  <span className="text-lg text-gray-400 line-through mb-1">€{offer.oldPrice}</span>
+                <div className="flex items-end justify-between">
+                  <div className="flex items-end gap-3">
+                    <span className="text-3xl font-black text-[#e33226]">€{offer.price}</span>
+                    <span className="text-lg text-gray-400 line-through mb-1">€{offer.oldPrice}</span>
+                  </div>
                 </div>
-                <button className="w-full bg-gray-900 text-white py-3 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-[#e33226] transition-colors">
-                  <ShoppingCart className="w-5 h-5" />
-                  Shto në shportë
-                </button>
               </div>
             </motion.div>
           ))}
