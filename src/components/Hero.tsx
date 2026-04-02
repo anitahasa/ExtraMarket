@@ -30,12 +30,12 @@ export default function Hero() {
           </div>
           
           <h1 className="text-5xl md:text-7xl font-black text-white leading-tight mb-6">
-            ExtraMarket Durrës — <span className="text-[#e33226]">Freshness & Savings Every Day</span>
+            ExtraMarket Durrës — <span className="text-[#e33226]">Freski dhe Kursim Çdo Ditë</span>
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-100 mb-10 leading-relaxed font-medium">
-            Discover our weekly offers and top products. <br />
-            <span className="text-lg opacity-90">Shijoni cilësinë e produkteve tona me çmimet më konkurruese.</span>
+            Zbuloni ofertat tona javore dhe produktet më cilësore. <br />
+            <span className="text-lg opacity-90">Shijoni cilësinë e produkteve tona me çmimet më konkurruese në treg.</span>
           </p>
 
           <div className="flex flex-wrap gap-4">

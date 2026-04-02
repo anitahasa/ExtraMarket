@@ -5,7 +5,7 @@ import { Instagram, ChefHat, ArrowRight } from 'lucide-react';
 const recipes = [
   {
     id: 1,
-    title: "Sallatë me Makarona & Perime të Freskëta",
+    title: "Sallatë me Makarona dhe Perime të Freskëta",
     ingredients: "Makarona, Domate, Vaj Ulliri, Borzilok",
     image: "https://images.unsplash.com/photo-1473093226795-af9932fe5856?auto=format&fit=crop&w=600&q=80",
     link: "https://www.instagram.com/extramarket_al/"
@@ -19,7 +19,7 @@ const recipes = [
   },
   {
     id: 3,
-    title: "Smoothie me Fruta Mali",
+    title: "Smudi me Fruta Mali",
     ingredients: "Manaferra, Kos, Mjaltë, Banane",
     image: "https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&w=600&q=80",
     link: "https://www.instagram.com/extramarket_al/"

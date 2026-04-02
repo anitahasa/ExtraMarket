@@ -19,8 +19,8 @@ export default function App() {
       <Navbar />
       <main>
         <Hero />
-        <Categories />
         <WeeklyOffers />
+        <Categories />
         <OffersGrid />
         <Recipes />
         <TrustSignals />

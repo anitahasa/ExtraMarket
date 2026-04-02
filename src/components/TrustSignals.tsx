@@ -18,7 +18,7 @@ const features = [
     bg: "bg-red-50"
   },
   {
-    name: "Shërbim i Miqësor",
+    name: "Shërbim Miqësor",
     description: "Stafi ynë është gjithmonë i gatshëm t'ju ndihmojë me buzëqeshje dhe profesionalizëm.",
     icon: ThumbsUp,
     color: "text-blue-600",
