@@ -4,36 +4,32 @@ import { ChevronLeft, ChevronRight, BookOpen } from "lucide-react";
 import HTMLFlipBook from "react-pageflip";
 
 const catalogPages = [
-  "katalogu-1.jpeg",
-  "katalogu-2.jpeg",
-  "katalogu-3.jpeg"
+  "images/catalog1.jpg",
+  "images/catalog2.jpg",
+  "images/catalog3.jpg"
 ];
 
 const Page = React.forwardRef((props: any, ref: any) => {
   const [imgSrc, setImgSrc] = useState(() => {
-    try {
-      // Kjo metodë gjen rrugën e saktë pavarësisht pajisjes apo mjedisit
-      const url = new URL(props.image, window.location.href);
-      return url.href;
-    } catch (e) {
-      return props.image;
-    }
+    // @ts-ignore
+    const base = import.meta.env.BASE_URL || "/";
+    // Kjo metodë gjen rrugën e saktë pavarësisht pajisjes apo mjedisit
+    return (base + props.image).replace(/\/+/g, '/');
   });
   const [retry, setRetry] = useState(0);
 
   const handleError = () => {
-    console.error("Dështoi ngarkimi i fotos:", imgSrc);
     if (retry === 0) {
-      // Provo rrugën absolute me emrin e repo-s
-      setImgSrc("/ExtraMarket/" + props.image);
+      // Provo rrugën relative direkte (./images/catalog1.jpg)
+      setImgSrc("./" + props.image);
       setRetry(1);
     } else if (retry === 1) {
-      // Provo rrugën absolute nga rrënja
+      // Provo rrugën absolute nga rrënja (/images/catalog1.jpg)
       setImgSrc("/" + props.image);
       setRetry(2);
     } else if (retry === 2) {
-      // Provo rrugën relative direkte
-      setImgSrc(props.image);
+      // Provo rrugën me emrin e repo-s (si shpëtim i fundit)
+      setImgSrc("/ExtraMarket/" + props.image);
       setRetry(3);
     }
   };
