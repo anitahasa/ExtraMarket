@@ -30,11 +30,10 @@ export default function Footer() {
             <h3 className="text-white font-semibold text-lg mb-6">Lidhje të Shpejta</h3>
             <ul className="space-y-4">
               <li><a href="#kreu" className="hover:text-red-400 transition-colors">Kreu</a></li>
-              <li><a href="#categories" className="hover:text-red-400 transition-colors">Kategoritë</a></li>
               <li><a href="#katalogu" className="hover:text-red-400 transition-colors">Katalogu i Ofertave</a></li>
-              <li><a href="#offers" className="hover:text-red-400 transition-colors">Ofertat e Javës</a></li>
               <li><a href="#recipes" className="hover:text-red-400 transition-colors">Recetat e Javës</a></li>
-              <li><a href="#pse-ne" className="hover:text-red-400 transition-colors">Pse ne?</a></li>
+              <li><a href="#pse-ne" className="hover:text-red-400 transition-colors">Pse ne</a></li>
+              <li><a href="#kontakti" className="hover:text-red-400 transition-colors">Pikat e shitjeve</a></li>
               <li><a href="#kontakti" className="hover:text-red-400 transition-colors">Kontakti</a></li>
             </ul>
           </div>

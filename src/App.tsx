@@ -3,6 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Categories from './components/Categories';
@@ -14,14 +15,16 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 export default function App() {
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
   return (
     <div className="min-h-screen bg-white font-sans scroll-smooth">
       <Navbar />
       <main>
         <Hero />
         <WeeklyOffers />
-        <Categories />
-        <OffersGrid />
+        <Categories onSelectCategory={setSelectedCategory} selectedCategory={selectedCategory} />
+        <OffersGrid selectedCategory={selectedCategory} />
         <Recipes />
         <TrustSignals />
         <Contact />
